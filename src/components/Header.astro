@@ -1,0 +1,34 @@
+---
+const links = [
+  ['Início', '#inicio'],
+  ['Serviços', '#servicos'],
+  ['Tratamentos', '#tratamentos'],
+  ['Sobre', '#sobre'],
+  ['Blog', '#blog'],
+  ['Contato', '#contato']
+];
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="#inicio" aria-label="Purerelax Beauty & Spa">
+      <span class="brand-mark" aria-hidden="true">✺</span>
+      <span>
+        <strong>Purerelax</strong>
+        <small>Beauty & Spa</small>
+      </span>
+    </a>
+
+    <button class="nav-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" data-nav-toggle>
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="site-nav" aria-label="Navegação principal" data-nav>
+      {links.map(([label, href]) => <a href={href}>{label}</a>)}
+    </nav>
+
+    <a class="header-cta" href="#contato">Agendar agora</a>
+  </div>
+</header>

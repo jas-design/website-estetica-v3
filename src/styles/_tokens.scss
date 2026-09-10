@@ -1,0 +1,20 @@
+:root {
+  --color-background: #fbfaf7;
+  --color-background-soft: #f5f1eb;
+  --color-surface: #ffffff;
+  --color-primary: #c7a246;
+  --color-primary-dark: #9a7626;
+  --color-text: #1d1a17;
+  --color-muted: #6f6860;
+  --color-border: #e8e1d7;
+  --color-footer: #151313;
+  --color-footer-muted: #bdb4a8;
+  --shadow-soft: 0 18px 45px rgba(29, 26, 23, 0.08);
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-body: "Inter", Arial, sans-serif;
+  --container: 1120px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 28px;
+  --section-y: clamp(3.5rem, 7vw, 6.75rem);
+}

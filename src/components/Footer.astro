@@ -1,0 +1,47 @@
+---
+const links = [
+  ['Início', '#inicio'],
+  ['Serviços', '#servicos'],
+  ['Sobre', '#sobre'],
+  ['Blog', '#blog'],
+  ['Contato', '#contato']
+];
+---
+
+<footer class="footer" id="contato">
+  <div class="container footer-grid">
+    <div>
+      <a class="brand brand--footer" href="#inicio" aria-label="Purerelax Beauty & Spa">
+        <span class="brand-mark" aria-hidden="true">✺</span>
+        <span>
+          <strong>Purerelax</strong>
+          <small>Beauty & Spa</small>
+        </span>
+      </a>
+      <p>Um refúgio moderno para corpo, mente e pele. Conteúdo e dados de contato são placeholders.</p>
+      <div class="socials" aria-label="Redes sociais">
+        <a href="#contato" aria-label="Facebook">f</a>
+        <a href="#contato" aria-label="Instagram">◎</a>
+        <a href="#contato" aria-label="Pinterest">p</a>
+        <a href="#contato" aria-label="YouTube">▶</a>
+      </div>
+    </div>
+    <div>
+      <h2>Links</h2>
+      {links.map(([label, href]) => <a href={href}>{label}</a>)}
+    </div>
+    <div>
+      <h2>Horários</h2>
+      <p>Segunda a sexta: 09:00 - 20:00</p>
+      <p>Sábado: 09:00 - 18:00</p>
+      <p>Domingo: 10:00 - 15:00</p>
+    </div>
+    <div>
+      <h2>Contato</h2>
+      <p>Rua Bem-Estar, 000</p>
+      <p>(00) 0000-0000</p>
+      <p>ola@purerelax.com</p>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 Purerelax. Conteúdo demonstrativo para landing page.</div>
+</footer>

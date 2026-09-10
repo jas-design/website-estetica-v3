@@ -1,0 +1,232 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Button from '../components/Button.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import WhatsAppButton from '../components/WhatsAppButton.astro';
+
+const whatsappPhone = '';
+
+const services = [
+  {
+    title: 'Spa com Pedras',
+    text: 'Ritual de relaxamento com pedras aquecidas e aromas suaves.',
+    image: '/images/pedras-quentes.webp',
+    icon: '✺'
+  },
+  {
+    title: 'Aromaterapia',
+    text: 'Óleos essenciais selecionados para criar uma pausa sensorial.',
+    image: '/images/oleos-aromaterapia.webp',
+    icon: '♧'
+  },
+  {
+    title: 'Renovação da Pele',
+    text: 'Cuidados faciais delicados para uma sensação de frescor e leveza.',
+    image: '/images/facial-botanico.webp',
+    icon: '✦'
+  }
+];
+
+const treatments = [
+  ['Massagem Relaxante', 'Uma pausa calma para restaurar o ritmo do corpo.', '/images/ritual-maos.webp'],
+  ['Terapia Facial', 'Texturas naturais e toque delicado para renovar a pele.', '/images/facial-botanico.webp'],
+  ['Ventosas', 'Ritual inspirado em técnicas tradicionais de bem-estar.', '/images/pedras-quentes.webp'],
+  ['Compressa Herbal', 'Calor, ervas e aroma em uma experiência acolhedora.', '/images/compressas-herbais.webp']
+];
+
+const products = [
+  ['Creme Facial Hidratante', '/images/esfoliacao-natural.webp'],
+  ['Óleo Corporal Nutritivo', '/images/oleos-aromaterapia.webp'],
+  ['Bálsamo de Massagem', '/images/facial-botanico.webp'],
+  ['Óleo Essencial Calmante', '/images/ritual-maos.webp']
+];
+
+const team = [
+  ['Sofia Lee', 'Diretora de Spa', '/images/terapeuta-1.webp'],
+  ['Daniel Kim', 'Massoterapeuta', '/images/terapeuta-4.webp'],
+  ['Olivia Park', 'Esteticista', '/images/terapeuta-2.webp'],
+  ['Liam Turner', 'Consultor Wellness', '/images/terapeuta-3.webp']
+];
+
+const stats = [
+  ['24', 'anos de experiência'],
+  ['870', 'clientes felizes'],
+  ['30', 'especialistas'],
+  ['1200', 'atendimentos realizados']
+];
+
+const posts = [
+  ['5 rituais de skincare para uma pele luminosa', '/images/facial-botanico.webp'],
+  ['Os benefícios da aromaterapia na rotina', '/images/oleos-aromaterapia.webp'],
+  ['Criando um momento mais calmo para você', '/images/pedras-quentes.webp']
+];
+---
+
+<BaseLayout>
+  <Header />
+  <main>
+    <!-- Section: Hero -->
+    <section class="hero" id="inicio" aria-labelledby="hero-title">
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="container hero-inner">
+        <div class="hero-copy" data-reveal>
+          <p class="eyebrow">Cuidado natural para brilhar</p>
+          <h1 id="hero-title">A Essência da Beleza</h1>
+          <p>Reequilibre mente, corpo e pele com experiências de spa holísticas, pensadas para uma rotina moderna.</p>
+          <Button href="#contato">Agendar atendimento</Button>
+        </div>
+        <p class="hero-note" aria-hidden="true">Beleza vive em equilíbrio</p>
+      </div>
+    </section>
+
+    <!-- Section: Services -->
+    <section class="section services" id="servicos">
+      <div class="container">
+        <SectionHeading eyebrow="O que fazemos" title="Nossos Serviços" text="Tratamentos cuidadosamente pensados para o seu bem-estar." />
+        <div class="service-grid">
+          {services.map((service) => (
+            <article class="service-card" data-reveal>
+              <span class="card-icon" aria-hidden="true">{service.icon}</span>
+              <h3>{service.title}</h3>
+              <p>{service.text}</p>
+              <img src={service.image} alt="" loading="lazy" />
+              <a href="#contato">Saiba mais <span aria-hidden="true">→</span></a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Treatments -->
+    <section class="section treatments" id="tratamentos">
+      <div class="container">
+        <SectionHeading eyebrow="Descubra nossos rituais" title="Massagens & Tratamentos" text="Terapias sob medida para uma experiência mais leve, calma e equilibrada." />
+        <div class="treatment-grid">
+          {treatments.map(([title, text, image]) => (
+            <article class="treatment-card" data-reveal>
+              <img src={image} alt="" loading="lazy" />
+              <h3>{title}</h3>
+              <p>{text}</p>
+              <a href="#contato">Ver detalhes <span aria-hidden="true">→</span></a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Feature -->
+    <section class="feature-band" aria-labelledby="feature-title">
+      <img src="/images/feature-dark.webp" alt="" loading="lazy" />
+      <div class="container feature-content" data-reveal>
+        <p class="eyebrow">Especial para você</p>
+        <h2 id="feature-title">Uma beleza mais serena começa aqui</h2>
+        <p>Conheça rituais sazonais e experiências de cuidado preparadas para desacelerar o dia.</p>
+        <Button href="#contato">Explorar ofertas</Button>
+        <div class="feature-points">
+          <span>Produtos naturais</span>
+          <span>Equipe acolhedora</span>
+          <span>Rotina mais equilibrada</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Collection -->
+    <section class="section collection">
+      <div class="container">
+        <SectionHeading eyebrow="Essenciais naturais" title="Coleção Livre de Químicos" text="Produtos e texturas inspirados pela natureza para complementar seu ritual." />
+        <div class="product-grid">
+          {products.map(([title, image]) => (
+            <article class="product-card" data-reveal>
+              <img src={image} alt="" loading="lazy" />
+              <h3>{title}</h3>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Testimonial -->
+    <section class="section testimonial">
+      <div class="container testimonial-inner" data-reveal>
+        <p class="eyebrow">Palavras gentis</p>
+        <h2>O Que Dizem</h2>
+        <div class="stars" aria-label="Avaliação demonstrativa de cinco estrelas">★★★★★</div>
+        <blockquote>
+          “Purerelax é meu refúgio da rotina. Os tratamentos criam uma atmosfera calma e profundamente cuidadosa.”
+        </blockquote>
+        <p class="quote-author">Cliente exemplo / placeholder</p>
+      </div>
+    </section>
+
+    <!-- Section: About -->
+    <section class="section about" id="sobre">
+      <div class="container about-grid">
+        <div class="about-image" data-reveal>
+          <img src="/images/relaxation.webp" alt="Ritual de massagem relaxante em ambiente de spa" loading="lazy" />
+        </div>
+        <div class="about-copy" data-reveal>
+          <p class="eyebrow">Nossa filosofia</p>
+          <h2>O Máximo Relaxamento</h2>
+          <p>Acreditamos que a beleza nasce do equilíbrio. Nossos rituais combinam toque cuidadoso, ingredientes naturais e uma atmosfera criada para você respirar melhor.</p>
+          <ul>
+            <li>Tratamentos corporais</li>
+            <li>Cuidado facial</li>
+            <li>Terapias holísticas</li>
+            <li>Equilíbrio mente e corpo</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Team -->
+    <section class="section team-section">
+      <div class="container">
+        <SectionHeading eyebrow="Nossa equipe" title="Terapeutas Certificados" />
+        <div class="team-grid">
+          {team.map(([name, role, image]) => (
+            <article class="team-card" data-reveal>
+              <img src={image} alt={`Retrato demonstrativo de ${name}`} loading="lazy" />
+              <h3>{name}</h3>
+              <p>{role}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Stats -->
+    <section class="stats-strip" aria-label="Indicadores demonstrativos">
+      <div class="container stats-grid">
+        {stats.map(([number, label]) => (
+          <div class="stat" data-reveal>
+            <strong>{number}</strong>
+            <span>{label}</span>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Section: Articles -->
+    <section class="section articles" id="blog">
+      <div class="container">
+        <SectionHeading eyebrow="Nosso jornal" title="Notícias & Artigos" />
+        <div class="article-grid">
+          {posts.map(([title, image]) => (
+            <article class="article-card" data-reveal>
+              <img src={image} alt="" loading="lazy" />
+              <div>
+                <p>Tendência / Agosto, 2026</p>
+                <h3>{title}</h3>
+                <a href="#contato">Ler mais <span aria-hidden="true">→</span></a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+  <WhatsAppButton phone={whatsappPhone} />
+</BaseLayout>
