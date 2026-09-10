@@ -1,9 +1,9 @@
 @use './tokens';
-@use './buttons';
-@use './forms';
-@use './header';
-@use './footer';
-@use './pages/home';
+@use './buttons.scss';
+@use './forms.scss';
+@use './header.scss';
+@use './footer.scss';
+@use './pages/home.scss';
 
 *,
 *::before,
