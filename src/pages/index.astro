@@ -1,4 +1,4 @@
----
+﻿---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Button from '../components/Button.astro';
 import SectionHeading from '../components/SectionHeading.astro';
@@ -6,82 +6,158 @@ import WhatsAppButton from '../components/WhatsAppButton.astro';
 
 const whatsappPhone = '';
 
+const heroSlides = [
+  {
+    eyebrow: 'Estética avançada com avaliação individual',
+    title: 'Beleza Natural, Técnica e Segurança',
+    text: 'Protocolos faciais e corporais planejados para valorizar seus traços, cuidar da pele e acompanhar seus objetivos com responsabilidade.',
+    button: 'Agendar avaliação',
+    note: 'Resultados começam por uma boa avaliação',
+    image: '/images/clinic-hero-light-1.webp'
+  },
+  {
+    eyebrow: 'Clínica estética com tecnologia',
+    title: 'Cuidado Preciso para Sua Pele',
+    text: 'Combinamos análise facial, equipamentos modernos e indicação responsável para criar um plano coerente com a sua rotina.',
+    button: 'Conhecer protocolos',
+    note: 'Tecnologia a favor da naturalidade',
+    image: '/images/clinic-hero-light-2.webp'
+  },
+  {
+    eyebrow: 'Protocolos faciais e corporais',
+    title: 'Tratamentos Pensados para Você',
+    text: 'Da limpeza de pele aos bioestimuladores, cada etapa é definida a partir da sua avaliação, histórico e objetivo estético.',
+    button: 'Falar com a clínica',
+    note: 'Cada pele pede uma estratégia',
+    image: '/images/clinic-hero-light-3.webp'
+  }
+];
+
 const services = [
   {
-    title: 'Spa com Pedras',
-    text: 'Ritual de relaxamento com pedras aquecidas e aromas suaves.',
-    image: '/images/pedras-quentes.webp',
+    title: 'Harmonização Facial',
+    text: 'Planejamento individual para equilibrar contornos, volumes e proporções com naturalidade.',
+    image: '/images/clinic-harmonizacao.webp',
     icon: '✺'
   },
   {
-    title: 'Aromaterapia',
-    text: 'Óleos essenciais selecionados para criar uma pausa sensorial.',
-    image: '/images/oleos-aromaterapia.webp',
+    title: 'Bioestimuladores',
+    text: 'Protocolos para estimular colágeno e melhorar firmeza, textura e qualidade da pele.',
+    image: '/images/clinic-bioestimuladores.webp',
     icon: '♧'
   },
   {
-    title: 'Renovação da Pele',
-    text: 'Cuidados faciais delicados para uma sensação de frescor e leveza.',
-    image: '/images/facial-botanico.webp',
+    title: 'Limpeza de Pele Premium',
+    text: 'Higienização profunda, extração cuidadosa e ativos selecionados para renovar a luminosidade.',
+    image: '/images/clinic-limpeza-pele.webp',
     icon: '✦'
   }
 ];
 
 const treatments = [
-  ['Massagem Relaxante', 'Uma pausa calma para restaurar o ritmo do corpo.', '/images/ritual-maos.webp'],
-  ['Terapia Facial', 'Texturas naturais e toque delicado para renovar a pele.', '/images/facial-botanico.webp'],
-  ['Ventosas', 'Ritual inspirado em técnicas tradicionais de bem-estar.', '/images/pedras-quentes.webp'],
-  ['Compressa Herbal', 'Calor, ervas e aroma em uma experiência acolhedora.', '/images/compressas-herbais.webp']
+  ['Toxina Botulínica', 'Suavização de linhas de expressão com resultado leve e preservação da naturalidade.', '/images/clinic-toxina.webp'],
+  ['Preenchimento Facial', 'Reposição estratégica de volume para lábios, olheiras, sulcos e contornos faciais.', '/images/clinic-preenchimento.webp'],
+  ['Peeling Químico', 'Renovação controlada da pele para melhorar textura, manchas e viço.', '/images/clinic-peeling.webp'],
+  ['Microagulhamento', 'Estímulo de colágeno para textura, poros, cicatrizes e rejuvenescimento progressivo.', '/images/clinic-microagulhamento.webp']
 ];
 
 const products = [
-  ['Creme Facial Hidratante', '/images/esfoliacao-natural.webp'],
-  ['Óleo Corporal Nutritivo', '/images/oleos-aromaterapia.webp'],
-  ['Bálsamo de Massagem', '/images/facial-botanico.webp'],
-  ['Óleo Essencial Calmante', '/images/ritual-maos.webp']
+  ['Skinbooster e hidratação injetável', '/images/clinic-recursos.webp'],
+  ['Laser e luz pulsada', '/images/clinic-tecnologia.webp'],
+  ['Radiofrequência corporal', '/images/clinic-recursos.webp'],
+  ['Drenagem linfática estética', '/images/clinic-avaliacao.webp']
 ];
 
 const team = [
-  ['Sofia Lee', 'Diretora de Spa', '/images/terapeuta-1.webp'],
-  ['Daniel Kim', 'Massoterapeuta', '/images/terapeuta-4.webp'],
-  ['Olivia Park', 'Esteticista', '/images/terapeuta-2.webp'],
-  ['Liam Turner', 'Consultor Wellness', '/images/terapeuta-3.webp']
+  ['Dra. Marina Alves', 'Biomédica esteta', '/images/clinic-equipe-1.webp'],
+  ['Camila Rocha', 'Especialista facial', '/images/clinic-equipe-2.webp'],
+  ['Renata Moreira', 'Esteticista corporal', '/images/clinic-equipe-3.webp'],
+  ['Lucas Almeida', 'Consultor de protocolos', '/images/clinic-equipe-4.webp']
 ];
 
 const stats = [
-  ['24', 'anos de experiência'],
-  ['870', 'clientes felizes'],
-  ['30', 'especialistas'],
-  ['1200', 'atendimentos realizados']
+  ['12', 'anos de experiência'],
+  ['2400', 'avaliações realizadas'],
+  ['18', 'protocolos estéticos'],
+  ['98', '% de retorno dos pacientes']
 ];
 
 const posts = [
-  ['5 rituais de skincare para uma pele luminosa', '/images/facial-botanico.webp'],
-  ['Os benefícios da aromaterapia na rotina', '/images/oleos-aromaterapia.webp'],
-  ['Criando um momento mais calmo para você', '/images/pedras-quentes.webp']
+  ['Como escolher entre toxina botulínica e preenchimento facial', '/images/clinic-preenchimento.webp'],
+  ['Bioestimuladores: quando incluir no plano de cuidados da pele', '/images/clinic-bioestimuladores.webp'],
+  ['Limpeza de pele profissional: frequência, preparo e manutenção', '/images/clinic-limpeza-pele.webp']
+];
+
+const testimonials = [
+  [
+    'Fui orientada com clareza desde a avaliação. O resultado ficou delicado, natural e exatamente dentro do que eu buscava.',
+    'Mariana Costa',
+    'Paciente de estética facial'
+  ],
+  [
+    'A equipe explicou cada etapa do protocolo e respeitou meu objetivo de manter uma aparência leve. Me senti segura do início ao retorno.',
+    'Beatriz Lima',
+    'Paciente de harmonização'
+  ],
+  [
+    'Minha pele mudou muito depois do plano de cuidados. O atendimento é acolhedor, técnico e sem promessas exageradas.',
+    'Carolina Mendes',
+    'Paciente de tratamentos de pele'
+  ]
 ];
 ---
 
 <BaseLayout>
   <main>
     <!-- Section: Hero -->
-    <section class="hero" id="inicio" aria-labelledby="hero-title">
-      <div class="hero-bg" aria-hidden="true"></div>
+    <section class="hero" id="inicio" aria-label="Destaques da Clínica Essenza" data-hero-slider>
+      <div class="hero-bg" aria-hidden="true">
+        {heroSlides.map((slide, index) => (
+          <img
+            class:list={['hero-slide-image', { 'is-active': index === 0 }]}
+            src={slide.image}
+            alt=""
+            loading={index === 0 ? 'eager' : 'lazy'}
+            decoding="async"
+            data-hero-slide-image
+          />
+        ))}
+      </div>
       <div class="container hero-inner">
-        <div class="hero-copy" data-reveal>
-          <p class="eyebrow">Cuidado natural para brilhar</p>
-          <h1 id="hero-title">A Essência da Beleza</h1>
-          <p>Reequilibre mente, corpo e pele com experiências de spa holísticas, pensadas para uma rotina moderna.</p>
-          <Button href="#contato">Agendar atendimento</Button>
-        </div>
-        <p class="hero-note" aria-hidden="true">Beleza vive em equilíbrio</p>
+        {heroSlides.map((slide, index) => (
+          <div
+            class:list={['hero-copy', 'hero-slide-copy', { 'is-active': index === 0 }]}
+            data-hero-slide-content
+            hidden={index !== 0}
+          >
+            <p class="eyebrow">{slide.eyebrow}</p>
+            <h1>{slide.title}</h1>
+            <p>{slide.text}</p>
+            <Button href="#contato">{slide.button}</Button>
+            {/* <p class="hero-note" aria-hidden="true">{slide.note}</p> */}
+          </div>
+        ))}
+      </div>
+      <div class="hero-controls" aria-label="Controles do destaque">
+        <button class="hero-control" type="button" aria-label="Slide anterior" data-hero-prev>
+          <svg class="hero-control-icon" aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+            <path d="M20 12H5" />
+            <path d="m11 6-6 6 6 6" />
+          </svg>
+        </button>
+        <button class="hero-control" type="button" aria-label="Próximo slide" data-hero-next>
+          <svg class="hero-control-icon" aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+            <path d="M4 12h15" />
+            <path d="m13 6 6 6-6 6" />
+          </svg>
+        </button>
       </div>
     </section>
 
     <!-- Section: Services -->
     <section class="section services" id="servicos">
       <div class="container">
-        <SectionHeading eyebrow="O que fazemos" title="Nossos Serviços" text="Tratamentos cuidadosamente pensados para o seu bem-estar." />
+        <SectionHeading eyebrow="O que fazemos" title="Procedimentos em Destaque" text="Tratamentos faciais e corporais combinados conforme necessidade, histórico e objetivo de cada paciente." />
         <div class="service-grid">
           {services.map((service) => (
             <article class="service-card" data-reveal>
@@ -99,7 +175,7 @@ const posts = [
     <!-- Section: Treatments -->
     <section class="section treatments" id="tratamentos">
       <div class="container">
-        <SectionHeading eyebrow="Descubra nossos rituais" title="Massagens & Tratamentos" text="Terapias sob medida para uma experiência mais leve, calma e equilibrada." />
+        <SectionHeading eyebrow="Protocolos personalizados" title="Faciais & Corporais" text="Cada plano pode combinar técnicas injetáveis, tecnologias e cuidados de pele para resultados progressivos e naturais." />
         <div class="treatment-grid">
           {treatments.map(([title, text, image]) => (
             <article class="treatment-card" data-reveal>
@@ -117,14 +193,30 @@ const posts = [
     <section class="feature-band" aria-labelledby="feature-title">
       <img src="/images/feature-dark.webp" alt="" loading="lazy" />
       <div class="container feature-content" data-reveal>
-        <p class="eyebrow">Especial para você</p>
-        <h2 id="feature-title">Uma beleza mais serena começa aqui</h2>
-        <p>Conheça rituais sazonais e experiências de cuidado preparadas para desacelerar o dia.</p>
-        <Button href="#contato">Explorar ofertas</Button>
-        <div class="feature-points">
-          <span>Produtos naturais</span>
-          <span>Equipe acolhedora</span>
-          <span>Rotina mais equilibrada</span>
+        <div class="feature-copy">
+          <p class="eyebrow">Oferta do dia</p>
+          <h2 id="feature-title">Cuidado Premium para sua Pele</h2>
+          <p class="feature-subtitle">25% off em protocolos selecionados</p>
+          <p>Uma condição especial para iniciar seu plano de estética facial com avaliação individual e acompanhamento profissional.</p>
+          <p class="feature-urgency">Agende antes que termine:</p>
+          <div class="feature-countdown" aria-label="Contagem demonstrativa da oferta">
+            <span>
+              <strong>35</strong>
+              <small>Dias</small>
+            </span>
+            <span>
+              <strong>30</strong>
+              <small>Horas</small>
+            </span>
+            <span>
+              <strong>50</strong>
+              <small>Min</small>
+            </span>
+            <span>
+              <strong>45</strong>
+              <small>Seg</small>
+            </span>
+          </div>
         </div>
       </div>
     </section>
@@ -132,7 +224,7 @@ const posts = [
     <!-- Section: Collection -->
     <section class="section collection">
       <div class="container">
-        <SectionHeading eyebrow="Essenciais naturais" title="Coleção Livre de Químicos" text="Produtos e texturas inspirados pela natureza para complementar seu ritual." />
+        <SectionHeading eyebrow="Tecnologias e cuidados" title="Recursos da Clínica" text="Procedimentos selecionados para tratar qualidade da pele, contorno, firmeza e manutenção dos resultados." />
         <div class="product-grid">
           {products.map(([title, image]) => (
             <article class="product-card" data-reveal>
@@ -145,15 +237,37 @@ const posts = [
     </section>
 
     <!-- Section: Testimonial -->
-    <section class="section testimonial">
+    <section class="section testimonial" data-testimonial-carousel>
       <div class="container testimonial-inner" data-reveal>
-        <p class="eyebrow">Palavras gentis</p>
-        <h2>O Que Dizem</h2>
-        <div class="stars" aria-label="Avaliação demonstrativa de cinco estrelas">★★★★★</div>
-        <blockquote>
-          “Purerelax é meu refúgio da rotina. Os tratamentos criam uma atmosfera calma e profundamente cuidadosa.”
-        </blockquote>
-        <p class="quote-author">Cliente exemplo / placeholder</p>
+        <p class="eyebrow">Depoimentos</p>
+        <h2>O que elas dizem?</h2>
+        <div class="testimonial-viewport">
+          {testimonials.map(([quote, name, role], index) => (
+            <article
+              class:list={['testimonial-slide', { 'is-active': index === 0 }]}
+              data-testimonial-slide
+              hidden={index !== 0}
+            >
+              <div class="stars" aria-label="Avaliação demonstrativa de cinco estrelas">★★★★★</div>
+              <blockquote>“{quote}”</blockquote>
+              <p class="quote-author">
+                <strong>{name}</strong>
+                <span>{role}</span>
+              </p>
+            </article>
+          ))}
+        </div>
+        <div class="testimonial-dots" aria-label="Selecionar depoimento">
+          {testimonials.map((_, index) => (
+            <button
+              class:list={['testimonial-dot', { 'is-active': index === 0 }]}
+              type="button"
+              aria-label={`Mostrar depoimento ${index + 1}`}
+              aria-pressed={index === 0 ? 'true' : 'false'}
+              data-testimonial-dot
+            ></button>
+          ))}
+        </div>
       </div>
     </section>
 
@@ -161,17 +275,17 @@ const posts = [
     <section class="section about" id="sobre">
       <div class="container about-grid">
         <div class="about-image" data-reveal>
-          <img src="/images/relaxation.webp" alt="Ritual de massagem relaxante em ambiente de spa" loading="lazy" />
+          <img src="/images/clinic-avaliacao.webp" alt="Atendimento estético facial em ambiente clínico acolhedor" loading="lazy" />
         </div>
         <div class="about-copy" data-reveal>
-          <p class="eyebrow">Nossa filosofia</p>
-          <h2>O Máximo Relaxamento</h2>
-          <p>Acreditamos que a beleza nasce do equilíbrio. Nossos rituais combinam toque cuidadoso, ingredientes naturais e uma atmosfera criada para você respirar melhor.</p>
+          <p class="eyebrow">Nossa abordagem</p>
+          <h2>Estética com Planejamento</h2>
+          <p>Acreditamos que bons resultados começam por escuta, avaliação e indicação responsável. Nossos protocolos unem técnica, tecnologia e acompanhamento para realçar a beleza individual sem excessos.</p>
           <ul>
-            <li>Tratamentos corporais</li>
-            <li>Cuidado facial</li>
-            <li>Terapias holísticas</li>
-            <li>Equilíbrio mente e corpo</li>
+            <li>Harmonização facial</li>
+            <li>Tratamentos de pele</li>
+            <li>Protocolos corporais</li>
+            <li>Acompanhamento personalizado</li>
           </ul>
         </div>
       </div>
@@ -180,7 +294,7 @@ const posts = [
     <!-- Section: Team -->
     <section class="section team-section">
       <div class="container">
-        <SectionHeading eyebrow="Nossa equipe" title="Terapeutas Certificados" />
+        <SectionHeading eyebrow="Nossa equipe" title="Especialistas em Estética" />
         <div class="team-grid">
           {team.map(([name, role, image]) => (
             <article class="team-card" data-reveal>
@@ -208,18 +322,36 @@ const posts = [
     <!-- Section: Articles -->
     <section class="section articles" id="blog">
       <div class="container">
-        <SectionHeading eyebrow="Nosso jornal" title="Notícias & Artigos" />
-        <div class="article-grid">
-          {posts.map(([title, image]) => (
-            <article class="article-card" data-reveal>
-              <img src={image} alt="" loading="lazy" />
-              <div>
-                <p>Tendência / Agosto, 2026</p>
-                <h3>{title}</h3>
-                <a href="#contato">Ler mais <span aria-hidden="true">→</span></a>
-              </div>
-            </article>
-          ))}
+        <SectionHeading eyebrow="Conteúdo para pacientes" title="Guias & Cuidados" />
+        <div class="article-carousel" data-article-carousel>
+          <div class="article-carousel-viewport">
+            <div class="article-grid" data-article-track>
+              {posts.map(([title, image]) => (
+                <article class="article-card" data-reveal>
+                  <img src={image} alt="" loading="lazy" />
+                  <div>
+                    <p>Estética / Setembro, 2026</p>
+                    <h3>{title}</h3>
+                    <a href="#contato">Ler mais <span aria-hidden="true">→</span></a>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+          <div class="article-carousel-controls" aria-label="Controles dos artigos">
+            <button class="article-carousel-button" type="button" aria-label="Artigo anterior" data-article-prev>
+              <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+                <path d="M20 12H5" />
+                <path d="m11 6-6 6 6 6" />
+              </svg>
+            </button>
+            <button class="article-carousel-button" type="button" aria-label="Próximo artigo" data-article-next>
+              <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+                <path d="M4 12h15" />
+                <path d="m13 6 6 6-6 6" />
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
     </section>
