@@ -1,6 +1,6 @@
 ---
 const links = [
-  ['Início', '#inicio'],
+  ['In&iacute;cio', '#inicio'],
   ['Procedimentos', '#servicos'],
   ['Sobre', '#sobre'],
   ['Blog', '#blog'],
@@ -11,37 +11,39 @@ const links = [
 <footer class="footer">
   <div class="container footer-grid">
     <div>
-      <a class="brand brand--footer" href="#inicio" aria-label="Clínica Essenza Estética Avançada">
-        <span class="brand-mark" aria-hidden="true">✺</span>
+      <a class="brand brand--footer" href="#inicio" aria-label="Cl&iacute;nica Essenza Est&eacute;tica Avan&ccedil;ada">
+        <span class="brand-mark" aria-hidden="true">&#10042;</span>
         <span>
-          <strong>Clínica Essenza</strong>
-          <small>Estética Avançada</small>
+          <strong>Cl&iacute;nica Essenza</strong>
+          <small>Est&eacute;tica Avan&ccedil;ada</small>
         </span>
       </a>
-      <p>Atendimento especializado em estética facial e corporal, com avaliação individualizada, tecnologias avançadas e foco em resultados naturais.</p>
+      <p>Atendimento especializado em est&eacute;tica facial e corporal, com avalia&ccedil;&atilde;o individualizada, tecnologias avan&ccedil;adas e foco em resultados naturais.</p>
       <div class="socials" aria-label="Redes sociais">
-        <a href="#contato" aria-label="Facebook">f</a>
-        <a href="#contato" aria-label="Instagram">◎</a>
-        <a href="#contato" aria-label="Pinterest">p</a>
-        <a href="#contato" aria-label="YouTube">▶</a>
+        <a class="social-link social-link--facebook" href="#contato" aria-label="Facebook">
+          <span class="social-icon social-icon--facebook" aria-hidden="true"></span>
+        </a>
+        <a class="social-link social-link--instagram" href="#contato" aria-label="Instagram">
+          <span class="social-icon social-icon--instagram" aria-hidden="true"></span>
+        </a>
       </div>
     </div>
     <div>
       <h2>Links</h2>
-      {links.map(([label, href]) => <a href={href}>{label}</a>)}
+      {links.map(([label, href]) => <a href={href} set:html={label} />)}
     </div>
     <div>
-      <h2>Horários</h2>
+      <h2>Hor&aacute;rios</h2>
       <p>Segunda a sexta: 09:00 - 20:00</p>
-      <p>Sábado: 09:00 - 18:00</p>
+      <p>S&aacute;bado: 09:00 - 18:00</p>
       <p>Domingo: atendimento sob agendamento</p>
     </div>
     <div>
       <h2>Contato</h2>
-      <p>Av. Saúde da Pele, 000</p>
-      <p>(00) 0000-0000</p>
+      <p>Av. Sa&uacute;de da Pele, 100</p>
+      <p>(11) 99123-4567</p>
       <p>contato@clinicaessenza.com</p>
     </div>
   </div>
-  <div class="footer-bottom">© 2026 Clínica Essenza. Informações demonstrativas para website de clínica estética.</div>
+  <div class="footer-bottom">&copy; 2026 Cl&iacute;nica Essenza. Informa&ccedil;&otilde;es demonstrativas para website de cl&iacute;nica est&eacute;tica.</div>
 </footer>

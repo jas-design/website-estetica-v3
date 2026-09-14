@@ -148,11 +148,23 @@
   display: block;
   width: 1.8rem;
   height: 1.8rem;
-  fill: none;
-  stroke: currentColor;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 1.5;
+  background: currentColor;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
+.hero-control-icon--prev {
+  -webkit-mask-image: url('/svgs/arrow-left.svg');
+  mask-image: url('/svgs/arrow-left.svg');
+}
+
+.hero-control-icon--next {
+  -webkit-mask-image: url('/svgs/arrow-right.svg');
+  mask-image: url('/svgs/arrow-right.svg');
 }
 
 /* Section: Services */
@@ -789,15 +801,27 @@ blockquote {
   outline-offset: 4px;
 }
 
-.article-carousel-button svg {
+.article-carousel-button-icon {
   display: block;
   width: 1.45rem;
   height: 1.45rem;
-  fill: none;
-  stroke: currentColor;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 1.5;
+  background: currentColor;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
+.article-carousel-button-icon--prev {
+  -webkit-mask-image: url('/svgs/arrow-left.svg');
+  mask-image: url('/svgs/arrow-left.svg');
+}
+
+.article-carousel-button-icon--next {
+  -webkit-mask-image: url('/svgs/arrow-right.svg');
+  mask-image: url('/svgs/arrow-right.svg');
 }
 
 /* Section: Book Appointment */
@@ -938,11 +962,20 @@ blockquote {
   transform: translateY(-2px);
 }
 
-.appointment-whatsapp svg {
+.appointment-whatsapp-icon {
+  display: block;
   flex: none;
   width: 2rem;
   height: 2rem;
-  fill: currentColor;
+  background: currentColor;
+  -webkit-mask-image: url('/svgs/whatsapp.svg');
+  mask-image: url('/svgs/whatsapp.svg');
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-size: contain;
 }
 
 @keyframes breathe {
