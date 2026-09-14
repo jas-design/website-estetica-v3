@@ -1115,10 +1115,16 @@ blockquote {
 
   .service-grid,
   .product-grid,
-  .team-grid,
-  .treatment-grid,
-  .stats-grid {
+  .treatment-grid {
     grid-template-columns: 1fr;
+  }
+
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .service-card {
@@ -1176,7 +1182,17 @@ blockquote {
   }
 
   .book-appointment-inner {
-    padding-block: 5.6rem;
+    justify-content: center;
+    padding: 5.6rem 20px;
+    text-align: center;
+  }
+
+  .appointment-content p:not(.eyebrow) {
+    margin-inline: auto;
+  }
+
+  .appointment-cta {
+    justify-content: center;
   }
 
   .appointment-whatsapp {
@@ -1192,6 +1208,12 @@ blockquote {
   }
 
   .stat {
-    justify-content: flex-start;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .stat span {
+    max-width: 110px;
   }
 }
