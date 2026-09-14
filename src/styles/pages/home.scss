@@ -167,6 +167,14 @@
   top: 22%;
 }
 
+.service-carousel {
+  position: relative;
+}
+
+.service-carousel-viewport {
+  overflow: hidden;
+}
+
 .service-grid,
 .product-grid,
 .article-grid {
@@ -175,7 +183,18 @@
   gap: 1.45rem;
 }
 
+.services .service-grid {
+  display: flex;
+  will-change: transform;
+  transition: transform 420ms ease;
+}
+
+.services .service-grid.is-jumping {
+  transition: none;
+}
+
 .service-card {
+  flex: 0 0 calc((100% - 2.9rem) / 3);
   min-height: 360px;
   padding: 2.2rem 1.45rem 1.35rem;
   background: rgba(255, 255, 255, 0.86);
@@ -218,6 +237,35 @@
   color: var(--color-primary-dark);
   font-size: 0.8rem;
   font-weight: 800;
+}
+
+.service-carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 1.55rem;
+}
+
+.service-carousel-dot {
+  width: 13px;
+  aspect-ratio: 1;
+  padding: 0;
+  background: transparent;
+  border: 1px solid #8b837b;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+
+.service-carousel-dot.is-active,
+.service-carousel-dot:hover {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.service-carousel-dot:focus-visible {
+  outline: 3px solid rgba(199, 162, 70, 0.42);
+  outline-offset: 4px;
 }
 
 /* Section: Treatments */
@@ -428,7 +476,7 @@
   height: clamp(210px, 25vw, 350px);
   border: 0;
   border-radius: 0;
-  background: url('/images/facial-botanico.webp') center / contain no-repeat;
+  background: url('/images/testimonial-before.png') center / contain no-repeat;
   opacity: 0.72;
   animation: none;
 }
@@ -440,7 +488,7 @@
   top: 14%;
   width: clamp(170px, 22vw, 320px);
   height: clamp(170px, 22vw, 320px);
-  background: url('/images/oleos-aromaterapia.webp') center / contain no-repeat;
+  background: url('/images/testimonial-after.png') center / contain no-repeat;
   opacity: 0.9;
   pointer-events: none;
 }
@@ -752,6 +800,151 @@ blockquote {
   stroke-width: 1.5;
 }
 
+/* Section: Book Appointment */
+.book-appointment {
+  position: relative;
+  min-height: 620px;
+  display: grid;
+  align-items: center;
+  overflow: hidden;
+  color: #fff;
+  background: #090909;
+  isolation: isolate;
+}
+
+.book-appointment::before,
+.book-appointment::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  z-index: 3;
+  width: 100%;
+  height: 92px;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  pointer-events: none;
+}
+
+.book-appointment::before {
+  top: -1px;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 92' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'%3E%3Cpath fill='%23FBFAF7' d='M0 0h1440v20c-138 0-245-31-436-10-214 23-331 65-568 34C263 21 142 47 0 18V0Z'/%3E%3C/svg%3E");
+}
+
+.book-appointment::after {
+  bottom: -1px;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 92' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'%3E%3Cpath fill='%23151313' d='M0 92h1440V64c-178-18-309 16-477 10-198-8-314-63-524-34C264 64 139 86 0 62v30Z'/%3E%3C/svg%3E");
+}
+
+.book-appointment > img {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: left center;
+}
+
+.book-appointment::selection {
+  background: rgba(199, 162, 70, 0.45);
+}
+
+.book-appointment-inner {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  padding-block: 7.5rem 6.8rem;
+}
+
+.book-appointment-inner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(circle at 24% 54%, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.46) 35%, rgba(0, 0, 0, 0.82) 74%),
+    linear-gradient(90deg, rgba(4, 4, 4, 0.08), rgba(9, 9, 9, 0.45) 42%, rgba(9, 9, 9, 0.96) 74%);
+}
+
+.appointment-content {
+  width: min(100%, 530px);
+}
+
+.appointment-copy {
+  min-width: 0;
+}
+
+.appointment-mark {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 2.1rem;
+  line-height: 1;
+}
+
+.appointment-content .eyebrow {
+  color: var(--color-primary);
+  font-family: var(--font-display);
+  font-size: 1.24rem;
+  font-style: italic;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.appointment-content h2 {
+  margin-bottom: 1rem;
+  color: #fff;
+  font-size: clamp(2.45rem, 4vw, 3.4rem);
+  line-height: 1;
+}
+
+.appointment-content p:not(.eyebrow) {
+  max-width: 380px;
+  margin-bottom: 0;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.appointment-cta {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 2rem;
+}
+
+.appointment-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
+  width: min(100%, 320px);
+  min-height: 76px;
+  padding: 1.08rem 1.6rem;
+  color: #fff;
+  background: #25d366;
+  border: 1px solid #25d366;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 18px 40px rgba(37, 211, 102, 0.28);
+  font-size: 0.86rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 180ms ease, background 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.appointment-whatsapp:hover {
+  background: #1ebe5d;
+  border-color: #1ebe5d;
+  box-shadow: 0 22px 52px rgba(37, 211, 102, 0.36);
+  transform: translateY(-2px);
+}
+
+.appointment-whatsapp svg {
+  flex: none;
+  width: 2rem;
+  height: 2rem;
+  fill: currentColor;
+}
+
 @keyframes breathe {
   0%,
   100% {
@@ -839,6 +1032,10 @@ blockquote {
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .service-card {
+    flex-basis: calc((100% - 1.45rem) / 2);
+  }
+
   .article-card {
     flex-basis: calc((100% - 1.45rem) / 2);
   }
@@ -862,6 +1059,14 @@ blockquote {
   .testimonial::before,
   .testimonial::after {
     opacity: 0.28;
+  }
+
+  .book-appointment-inner {
+    justify-content: flex-start;
+  }
+
+  .book-appointment-inner::before {
+    background: rgba(9, 9, 9, 0.76);
   }
 
   .about-grid {
@@ -916,6 +1121,10 @@ blockquote {
     grid-template-columns: 1fr;
   }
 
+  .service-card {
+    flex-basis: 100%;
+  }
+
   .article-card {
     flex-basis: 100%;
   }
@@ -955,6 +1164,23 @@ blockquote {
     flex-direction: column;
     align-items: center;
     gap: 0.1rem;
+  }
+
+  .book-appointment {
+    min-height: auto;
+  }
+
+  .book-appointment::before,
+  .book-appointment::after {
+    height: 58px;
+  }
+
+  .book-appointment-inner {
+    padding-block: 5.6rem;
+  }
+
+  .appointment-whatsapp {
+    width: 100%;
   }
 
   .about-copy ul {

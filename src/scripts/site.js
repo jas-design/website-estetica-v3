@@ -2,8 +2,10 @@ const navToggle = document.querySelector('[data-nav-toggle]');
 const nav = document.querySelector('[data-nav]');
 const revealItems = document.querySelectorAll('[data-reveal]');
 const heroSlider = document.querySelector('[data-hero-slider]');
+const serviceCarousel = document.querySelector('[data-service-carousel]');
 const articleCarousel = document.querySelector('[data-article-carousel]');
 const testimonialCarousel = document.querySelector('[data-testimonial-carousel]');
+const featureCountdown = document.querySelector('[data-feature-countdown]');
 
 function closeMenu() {
   navToggle?.setAttribute('aria-expanded', 'false');
@@ -201,6 +203,110 @@ function setupArticleCarousel() {
   startAutoplay();
 }
 
+function setupServiceCarousel() {
+  if (!serviceCarousel) return;
+
+  const track = serviceCarousel.querySelector('[data-service-track]');
+  const dots = [...serviceCarousel.querySelectorAll('[data-service-dot]')];
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (!track) return;
+
+  const originalCards = [...track.querySelectorAll('.service-card')];
+
+  if (originalCards.length < 2) return;
+
+  function cloneCard(card) {
+    const clone = card.cloneNode(true);
+
+    clone.removeAttribute('data-reveal');
+    clone.classList.add('is-visible');
+
+    return clone;
+  }
+
+  originalCards.forEach((card) => {
+    track.append(cloneCard(card));
+  });
+
+  [...originalCards].reverse().forEach((card) => {
+    track.prepend(cloneCard(card));
+  });
+
+  const originalCount = originalCards.length;
+  let activeIndex = originalCount;
+  let intervalId;
+
+  function getStepSize() {
+    const firstCard = track.querySelector('.service-card');
+    const secondCard = firstCard?.nextElementSibling;
+
+    if (!firstCard) return 0;
+    if (!secondCard) return firstCard.getBoundingClientRect().width;
+
+    return secondCard.getBoundingClientRect().left - firstCard.getBoundingClientRect().left;
+  }
+
+  function updateDots() {
+    const normalizedIndex = ((activeIndex - originalCount) % originalCount + originalCount) % originalCount;
+
+    dots.forEach((dot, dotIndex) => {
+      const isActive = dotIndex === normalizedIndex;
+
+      dot.classList.toggle('is-active', isActive);
+      dot.setAttribute('aria-pressed', String(isActive));
+    });
+  }
+
+  function moveTo(index, animate = true) {
+    activeIndex = index;
+    track.classList.toggle('is-jumping', !animate);
+    track.style.transform = `translateX(${-getStepSize() * activeIndex}px)`;
+    updateDots();
+  }
+
+  function normalizeLoop() {
+    if (activeIndex >= originalCount * 2) {
+      moveTo(originalCount, false);
+    }
+
+    if (activeIndex < originalCount) {
+      moveTo(originalCount * 2 - 1, false);
+    }
+  }
+
+  function stopAutoplay() {
+    if (intervalId) {
+      window.clearInterval(intervalId);
+      intervalId = undefined;
+    }
+  }
+
+  function startAutoplay() {
+    if (prefersReducedMotion || intervalId) return;
+
+    intervalId = window.setInterval(() => moveTo(activeIndex + 1), 4600);
+  }
+
+  dots.forEach((dot, dotIndex) => {
+    dot.addEventListener('click', () => {
+      stopAutoplay();
+      moveTo(originalCount + dotIndex);
+    });
+  });
+
+  track.addEventListener('transitionend', normalizeLoop);
+  window.addEventListener('resize', () => moveTo(activeIndex, false));
+
+  serviceCarousel.addEventListener('pointerenter', stopAutoplay);
+  serviceCarousel.addEventListener('pointerleave', startAutoplay);
+  serviceCarousel.addEventListener('focusin', stopAutoplay);
+  serviceCarousel.addEventListener('focusout', startAutoplay);
+
+  moveTo(activeIndex, false);
+  startAutoplay();
+}
+
 function setupTestimonialCarousel() {
   if (!testimonialCarousel) return;
 
@@ -259,8 +365,62 @@ function setupTestimonialCarousel() {
   startAutoplay();
 }
 
+function setupFeatureCountdown() {
+  if (!featureCountdown) return;
+
+  const units = {
+    days: featureCountdown.querySelector('[data-countdown-unit="days"]'),
+    hours: featureCountdown.querySelector('[data-countdown-unit="hours"]'),
+    minutes: featureCountdown.querySelector('[data-countdown-unit="minutes"]'),
+    seconds: featureCountdown.querySelector('[data-countdown-unit="seconds"]')
+  };
+  const storageKey = 'clinica-essenza-feature-countdown-end';
+  const offerDuration = ((35 * 24 + 30) * 60 * 60 + 50 * 60 + 45) * 1000;
+  let endTime = Number(window.localStorage.getItem(storageKey));
+
+  function createEndTime() {
+    endTime = Date.now() + offerDuration;
+    window.localStorage.setItem(storageKey, String(endTime));
+  }
+
+  function setText(unit, value) {
+    if (!unit) return;
+
+    unit.textContent = String(value).padStart(2, '0');
+  }
+
+  function updateCountdown() {
+    let remaining = endTime - Date.now();
+
+    if (!Number.isFinite(endTime) || remaining <= 0) {
+      createEndTime();
+      remaining = endTime - Date.now();
+    }
+
+    const totalSeconds = Math.max(0, Math.floor(remaining / 1000));
+    const days = Math.floor(totalSeconds / 86400);
+    const hours = Math.floor((totalSeconds % 86400) / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+
+    setText(units.days, days);
+    setText(units.hours, hours);
+    setText(units.minutes, minutes);
+    setText(units.seconds, seconds);
+  }
+
+  if (!Number.isFinite(endTime) || endTime <= Date.now()) {
+    createEndTime();
+  }
+
+  updateCountdown();
+  window.setInterval(updateCountdown, 1000);
+}
+
 setupMenu();
 setupRevealAnimation();
 setupHeroSlider();
+setupServiceCarousel();
 setupArticleCarousel();
 setupTestimonialCarousel();
+setupFeatureCountdown();

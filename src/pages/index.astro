@@ -5,6 +5,9 @@ import SectionHeading from '../components/SectionHeading.astro';
 import WhatsAppButton from '../components/WhatsAppButton.astro';
 
 const whatsappPhone = '';
+const normalizedWhatsappPhone = whatsappPhone.replace(/\D/g, '');
+const whatsappMessage = encodeURIComponent('Olá! Gostaria de agendar uma avaliação estética.');
+const whatsappHref = normalizedWhatsappPhone ? `https://wa.me/${normalizedWhatsappPhone}?text=${whatsappMessage}` : '#contato';
 
 const heroSlides = [
   {
@@ -69,10 +72,10 @@ const products = [
 ];
 
 const team = [
-  ['Dra. Marina Alves', 'Biomédica esteta', '/images/clinic-equipe-1.webp'],
-  ['Camila Rocha', 'Especialista facial', '/images/clinic-equipe-2.webp'],
-  ['Renata Moreira', 'Esteticista corporal', '/images/clinic-equipe-3.webp'],
-  ['Lucas Almeida', 'Consultor de protocolos', '/images/clinic-equipe-4.webp']
+  ['Dra. Marina Alves', 'Biomédica esteta', '/images/clinic-equipe-1-portrait.png'],
+  ['Camila Rocha', 'Especialista facial', '/images/clinic-equipe-2-portrait.png'],
+  ['Renata Moreira', 'Esteticista corporal', '/images/clinic-equipe-3-portrait.png'],
+  ['Lucas Almeida', 'Consultor de protocolos', '/images/clinic-equipe-4-portrait.png']
 ];
 
 const stats = [
@@ -158,16 +161,31 @@ const testimonials = [
     <section class="section services" id="servicos">
       <div class="container">
         <SectionHeading eyebrow="O que fazemos" title="Procedimentos em Destaque" text="Tratamentos faciais e corporais combinados conforme necessidade, histórico e objetivo de cada paciente." />
-        <div class="service-grid">
-          {services.map((service) => (
-            <article class="service-card" data-reveal>
-              <span class="card-icon" aria-hidden="true">{service.icon}</span>
-              <h3>{service.title}</h3>
-              <p>{service.text}</p>
-              <img src={service.image} alt="" loading="lazy" />
-              <a href="#contato">Saiba mais <span aria-hidden="true">→</span></a>
-            </article>
-          ))}
+        <div class="service-carousel" data-service-carousel>
+          <div class="service-carousel-viewport">
+            <div class="service-grid" data-service-track>
+              {services.map((service) => (
+                <article class="service-card" data-reveal>
+                  <span class="card-icon" aria-hidden="true">{service.icon}</span>
+                  <h3>{service.title}</h3>
+                  <p>{service.text}</p>
+                  <img src={service.image} alt="" loading="lazy" />
+                  <a href="#contato">Saiba mais <span aria-hidden="true">→</span></a>
+                </article>
+              ))}
+            </div>
+          </div>
+          <div class="service-carousel-dots" aria-label="Selecionar procedimento">
+            {services.map((_, index) => (
+              <button
+                class:list={['service-carousel-dot', { 'is-active': index === 0 }]}
+                type="button"
+                aria-label={`Mostrar procedimento ${index + 1}`}
+                aria-pressed={index === 0 ? 'true' : 'false'}
+                data-service-dot
+              ></button>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -199,21 +217,21 @@ const testimonials = [
           <p class="feature-subtitle">25% off em protocolos selecionados</p>
           <p>Uma condição especial para iniciar seu plano de estética facial com avaliação individual e acompanhamento profissional.</p>
           <p class="feature-urgency">Agende antes que termine:</p>
-          <div class="feature-countdown" aria-label="Contagem demonstrativa da oferta">
+          <div class="feature-countdown" aria-label="Contagem regressiva da oferta" data-feature-countdown>
             <span>
-              <strong>35</strong>
+              <strong data-countdown-unit="days">35</strong>
               <small>Dias</small>
             </span>
             <span>
-              <strong>30</strong>
+              <strong data-countdown-unit="hours">30</strong>
               <small>Horas</small>
             </span>
             <span>
-              <strong>50</strong>
+              <strong data-countdown-unit="minutes">50</strong>
               <small>Min</small>
             </span>
             <span>
-              <strong>45</strong>
+              <strong data-countdown-unit="seconds">45</strong>
               <small>Seg</small>
             </span>
           </div>
@@ -351,6 +369,29 @@ const testimonials = [
                 <path d="m13 6 6 6-6 6" />
               </svg>
             </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Book Appointment -->
+    <section class="book-appointment" aria-labelledby="book-appointment-title"  id="contato">
+      <img src="/images/feature-dark.webp" alt="" loading="lazy" />
+      <div class="container book-appointment-inner">
+        <div class="appointment-content" data-reveal>
+          <div class="appointment-copy">
+            <span class="appointment-mark" aria-hidden="true">✺</span>
+            <p class="eyebrow">Agendamento</p>
+            <h2 id="book-appointment-title">Agende Agora</h2>
+            <p>Conte para nossa equipe o que você procura e retornaremos com a melhor opção de horário para sua avaliação estética.</p>
+          </div>
+          <div class="appointment-cta">
+            <a class="appointment-whatsapp" href={whatsappHref} target={normalizedWhatsappPhone ? '_blank' : undefined} rel={normalizedWhatsappPhone ? 'noopener noreferrer' : undefined}>
+              <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884" />
+              </svg>
+              <span>Agendar pelo WhatsApp</span>
+            </a>
           </div>
         </div>
       </div>
