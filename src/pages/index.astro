@@ -114,32 +114,30 @@ const testimonials = [
   <main>
     <!-- Section: Hero -->
     <section class="hero" id="inicio" aria-label="Destaques da Clínica Essenza" data-hero-slider>
-      <div class="hero-bg" aria-hidden="true">
+      <div class="hero-bg swiper" data-hero-swiper>
+        <div class="swiper-wrapper">
         {heroSlides.map((slide, index) => (
-          <img
-            class:list={['hero-slide-image', { 'is-active': index === 0 }]}
-            src={slide.image}
-            alt=""
-            loading={index === 0 ? 'eager' : 'lazy'}
-            decoding="async"
-            data-hero-slide-image
-          />
-        ))}
-      </div>
-      <div class="container hero-inner">
-        {heroSlides.map((slide, index) => (
-          <div
-            class:list={['hero-copy', 'hero-slide-copy', { 'is-active': index === 0 }]}
-            data-hero-slide-content
-            hidden={index !== 0}
-          >
-            <p class="eyebrow">{slide.eyebrow}</p>
-            <h1>{slide.title}</h1>
-            <p>{slide.text}</p>
-            <Button href="#contato">{slide.button}</Button>
-            {/* <p class="hero-note" aria-hidden="true">{slide.note}</p> */}
+          <div class="hero-bg-slide swiper-slide">
+            <img
+              class="hero-slide-image"
+              src={slide.image}
+              alt=""
+              loading={index === 0 ? 'eager' : 'lazy'}
+              decoding="async"
+            />
+            <div class="container hero-inner">
+              <div class="hero-copy">
+                <p class="eyebrow">{slide.eyebrow}</p>
+                <h1>{slide.title}</h1>
+                <p>{slide.text}</p>
+                <Button href="#contato">{slide.button}</Button>
+                {/* <p class="hero-note" aria-hidden="true">{slide.note}</p> */}
+              </div>
+            </div>
           </div>
         ))}
+        </div>
+        <div class="hero-progress-pagination" data-hero-pagination></div>
       </div>
       <div class="hero-controls" aria-label="Controles do destaque">
         <button class="hero-control" type="button" aria-label="Slide anterior" data-hero-prev>

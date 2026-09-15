@@ -11,24 +11,40 @@
 .hero-bg {
   position: absolute;
   inset: 0;
-  display: grid;
-  place-items: center;
   height: 100%;
   background: #f7f3ed;
 }
 
+.hero-bg-slide {
+  position: relative;
+  height: 100%;
+}
+
+.hero-bg .swiper-wrapper {
+  height: 100%;
+}
+
 .hero-slide-image {
-  grid-area: 1 / 1;
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
-  opacity: 0;
-  transition: opacity 700ms ease;
 }
 
-.hero-slide-image.is-active {
-  opacity: 1;
+.hero-progress-pagination {
+  position: absolute;
+  left: clamp(1.25rem, 8vw, 8rem);
+  bottom: clamp(1.25rem, 4vw, 3rem);
+  z-index: 4;
+  width: min(340px, calc(100% - 2.5rem));
+  height: 3px;
+  background: rgba(29, 26, 23, 0.16);
+}
+
+.hero-progress-pagination .swiper-pagination-progressbar-fill {
+  background: #C7A246;
 }
 
 .hero::after,
@@ -53,6 +69,7 @@
 
 .hero-inner {
   position: relative;
+  z-index: 2;
   display: flex;
   align-items: center;
   min-height: 760px;
@@ -102,10 +119,6 @@
   font-size: clamp(2rem, 4vw, 4rem);
   font-style: italic;
   transform: rotate(-8deg);
-}
-
-.hero-slide-copy[hidden] {
-  display: none;
 }
 
 .hero-controls {

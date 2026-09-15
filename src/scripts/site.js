@@ -1,3 +1,8 @@
+import Swiper from 'swiper';
+import { Autoplay, EffectFade, Navigation, Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/effect-fade';
+import 'swiper/css/pagination';
 import Splide from '@splidejs/splide';
 import '@splidejs/splide/css/core';
 
@@ -55,59 +60,42 @@ function setupRevealAnimation() {
 function setupHeroSlider() {
   if (!heroSlider) return;
 
-  const images = [...heroSlider.querySelectorAll('[data-hero-slide-image]')];
-  const contents = [...heroSlider.querySelectorAll('[data-hero-slide-content]')];
+  const swiperElement = heroSlider.querySelector('[data-hero-swiper]');
   const previousButton = heroSlider.querySelector('[data-hero-prev]');
   const nextButton = heroSlider.querySelector('[data-hero-next]');
+  const paginationElement = heroSlider.querySelector('[data-hero-pagination]');
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let activeIndex = 0;
-  let intervalId;
 
-  function showSlide(index) {
-    activeIndex = (index + images.length) % images.length;
+  if (!swiperElement) return;
 
-    images.forEach((image, imageIndex) => {
-      image.classList.toggle('is-active', imageIndex === activeIndex);
-    });
-
-    contents.forEach((content, contentIndex) => {
-      const isActive = contentIndex === activeIndex;
-
-      content.hidden = !isActive;
-      content.classList.toggle('is-active', isActive);
-    });
-  }
-
-  function stopAutoplay() {
-    if (intervalId) {
-      window.clearInterval(intervalId);
-      intervalId = undefined;
-    }
-  }
-
-  function startAutoplay() {
-    if (prefersReducedMotion || intervalId || images.length < 2) return;
-
-    intervalId = window.setInterval(() => showSlide(activeIndex + 1), 6500);
-  }
-
-  previousButton?.addEventListener('click', () => {
-    stopAutoplay();
-    showSlide(activeIndex - 1);
+  const heroSwiper = new Swiper(swiperElement, {
+    modules: [Autoplay, EffectFade, Navigation, Pagination],
+    effect: 'fade',
+    fadeEffect: {
+      crossFade: true
+    },
+    init: false,
+    loop: true,
+    speed: 700,
+    allowTouchMove: true,
+    navigation: {
+      prevEl: previousButton,
+      nextEl: nextButton
+    },
+    pagination: {
+      el: paginationElement,
+      type: 'progressbar'
+    },
+    autoplay: prefersReducedMotion
+      ? false
+      : {
+          delay: 6500,
+          disableOnInteraction: false,
+          pauseOnMouseEnter: true
+        }
   });
 
-  nextButton?.addEventListener('click', () => {
-    stopAutoplay();
-    showSlide(activeIndex + 1);
-  });
-
-  heroSlider.addEventListener('pointerenter', stopAutoplay);
-  heroSlider.addEventListener('pointerleave', startAutoplay);
-  heroSlider.addEventListener('focusin', stopAutoplay);
-  heroSlider.addEventListener('focusout', startAutoplay);
-
-  showSlide(0);
-  startAutoplay();
+  heroSwiper.init();
 }
 
 function setupServicesSplide() {
