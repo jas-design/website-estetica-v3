@@ -11,14 +11,6 @@ const whatsappHref = normalizedWhatsappPhone ? `https://wa.me/${normalizedWhatsa
 
 const heroSlides = [
   {
-    eyebrow: 'Estética avançada com avaliação individual',
-    title: 'Beleza Natural, Técnica e Segurança',
-    text: 'Protocolos faciais e corporais planejados para valorizar seus traços, cuidar da pele e acompanhar seus objetivos com responsabilidade.',
-    button: 'Agendar avaliação',
-    note: 'Resultados começam por uma boa avaliação',
-    image: '/images/clinic-hero-light-1.webp'
-  },
-  {
     eyebrow: 'Clínica estética com tecnologia',
     title: 'Cuidado Preciso para Sua Pele',
     text: 'Combinamos análise facial, equipamentos modernos e indicação responsável para criar um plano coerente com a sua rotina.',
@@ -26,6 +18,14 @@ const heroSlides = [
     note: 'Tecnologia a favor da naturalidade',
     image: '/images/clinic-hero-light-2.webp'
   },
+  {
+    eyebrow: 'Estética avançada com avaliação individual',
+    title: 'Beleza Natural, Técnica e Segurança',
+    text: 'Protocolos faciais e corporais planejados para valorizar seus traços, cuidar da pele e acompanhar seus objetivos com responsabilidade.',
+    button: 'Agendar avaliação',
+    note: 'Resultados começam por uma boa avaliação',
+    image: '/images/clinic-hero-light-1.webp'
+  },  
   {
     eyebrow: 'Protocolos faciais e corporais',
     title: 'Tratamentos Pensados para Você',
@@ -162,7 +162,7 @@ const testimonials = [
                   <h3>{service.title}</h3>
                   <p>{service.text}</p>
                   <img src={service.image} alt="" loading="lazy" />
-                  <a href="#contato">Saiba mais <span aria-hidden="true">→</span></a>
+                  <a href="#contato">Saiba mais <span aria-hidden="true">&rarr;</span></a>
                 </article>
               ))}
             </div>
@@ -188,11 +188,11 @@ const testimonials = [
         <SectionHeading eyebrow="Protocolos personalizados" title="Faciais & Corporais" text="Cada plano pode combinar técnicas injetáveis, tecnologias e cuidados de pele para resultados progressivos e naturais." />
         <div class="treatment-grid">
           {treatments.map(([title, text, image]) => (
-            <article class="treatment-card" data-reveal>
+            <article class="treatment-card" data-aos="fade-up">
               <img src={image} alt="" loading="lazy" />
               <h3>{title}</h3>
               <p>{text}</p>
-              <a href="#contato">Ver detalhes <span aria-hidden="true">→</span></a>
+              <a href="#contato">Ver detalhes <span aria-hidden="true">&rarr;</span></a>
             </article>
           ))}
         </div>
@@ -202,7 +202,7 @@ const testimonials = [
     <!-- Section: Feature -->
     <section class="feature-band" aria-labelledby="feature-title">
       <img src="/images/feature-dark.webp" alt="" loading="lazy" />
-      <div class="container feature-content" data-reveal>
+      <div class="container feature-content" data-aos="fade-up">
         <div class="feature-copy">
           <p class="eyebrow">Oferta do dia</p>
           <h2 id="feature-title">Cuidado Premium para sua Pele</h2>
@@ -237,7 +237,7 @@ const testimonials = [
         <SectionHeading eyebrow="Tecnologias e cuidados" title="Recursos da Clínica" text="Procedimentos selecionados para tratar qualidade da pele, contorno, firmeza e manutenção dos resultados." />
         <div class="product-grid">
           {products.map(([title, image]) => (
-            <article class="product-card" data-reveal>
+            <article class="product-card" data-aos="fade-up">
               <img src={image} alt="" loading="lazy" />
               <h3>{title}</h3>
             </article>
@@ -248,7 +248,7 @@ const testimonials = [
 
     <!-- Section: Testimonial -->
     <section class="section testimonial">
-      <div class="container testimonial-inner" data-reveal>
+      <div class="container testimonial-inner" data-aos="fade-up">
         <p class="eyebrow">Depoimentos</p>
         <h2>O que elas dizem?</h2>
         <div class="testimonial-carousel splide" aria-label="Depoimentos de pacientes" data-testimonials-splide>
@@ -256,7 +256,7 @@ const testimonials = [
             <div class="testimonial-viewport splide__list">
               {testimonials.map(([quote, name, role]) => (
                 <article class="testimonial-slide splide__slide">
-                  <div class="stars" aria-label="Avaliação demonstrativa de cinco estrelas">★★★★★</div>
+                  <div class="stars" aria-label="Avaliação demonstrativa de cinco estrelas">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
                   <blockquote>“{quote}”</blockquote>
                   <p class="quote-author">
                     <strong>{name}</strong>
@@ -284,10 +284,10 @@ const testimonials = [
     <!-- Section: About -->
     <section class="section about" id="sobre">
       <div class="container about-grid">
-        <div class="about-image" data-reveal>
+        <div class="about-image" data-aos="fade-up">
           <img src="/images/clinic-avaliacao.webp" alt="Atendimento estético facial em ambiente clínico acolhedor" loading="lazy" />
         </div>
-        <div class="about-copy" data-reveal>
+        <div class="about-copy" data-aos="fade-up">
           <p class="eyebrow">Nossa abordagem</p>
           <h2>Estética com Planejamento</h2>
           <p>Acreditamos que bons resultados começam por escuta, avaliação e indicação responsável. Nossos protocolos unem técnica, tecnologia e acompanhamento para realçar a beleza individual sem excessos.</p>
@@ -307,7 +307,7 @@ const testimonials = [
         <SectionHeading eyebrow="Nossa equipe" title="Especialistas em Estética" />
         <div class="team-grid">
           {team.map(([name, role, image]) => (
-            <article class="team-card" data-reveal>
+            <article class="team-card" data-aos="fade-up">
               <img src={image} alt={`Retrato demonstrativo de ${name}`} loading="lazy" />
               <h3>{name}</h3>
               <p>{role}</p>
@@ -321,7 +321,7 @@ const testimonials = [
     <section class="stats-strip" aria-label="Indicadores demonstrativos">
       <div class="container stats-grid">
         {stats.map(([number, label]) => (
-          <div class="stat" data-reveal>
+          <div class="stat" data-aos="fade-up">
             <strong>{number}</strong>
             <span>{label}</span>
           </div>
@@ -342,7 +342,7 @@ const testimonials = [
                   <div>
                     <p>Estética / Setembro, 2026</p>
                     <h3>{title}</h3>
-                    <a href="#contato">Ler mais <span aria-hidden="true">→</span></a>
+                    <a href="#contato">Ler mais <span aria-hidden="true">&rarr;</span></a>
                   </div>
                 </article>
               ))}
@@ -364,9 +364,9 @@ const testimonials = [
     <section class="book-appointment" aria-labelledby="book-appointment-title"  id="contato">
       <img src="/images/feature-dark.webp" alt="" loading="lazy" />
       <div class="container book-appointment-inner">
-        <div class="appointment-content" data-reveal>
+        <div class="appointment-content" data-aos="fade-up">
           <div class="appointment-copy">
-            <span class="appointment-mark" aria-hidden="true">✺</span>
+            <span class="appointment-mark" aria-hidden="true">&#10042;</span>
             <p class="eyebrow">Agendamento</p>
             <h2 id="book-appointment-title">Agende Agora</h2>
             <p>Conte para nossa equipe o que você procura e retornaremos com a melhor opção de horário para sua avaliação estética.</p>
@@ -383,3 +383,4 @@ const testimonials = [
   </main>
   <WhatsAppButton phone={whatsappPhone} />
 </BaseLayout>
+

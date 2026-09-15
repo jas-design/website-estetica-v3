@@ -123,15 +123,6 @@ h3 {
   color: var(--color-muted);
 }
 
-[data-reveal] {
-  transform: translateX(-24px);
-  transition: transform 700ms ease;
-}
-
-[data-reveal].is-visible {
-  transform: translateX(0);
-}
-
 @media (max-width: 768px) {
   .container {
     width: min(100% - 1.25rem, var(--container));
