@@ -10,9 +10,9 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@splidejs/splide": "^4.1.4",
     "astro": "^7.3.2",
     "sass": "latest",
     "typescript": "latest"
-  },
-  "devDependencies": {}
+  }
 }

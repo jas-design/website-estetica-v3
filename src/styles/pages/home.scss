@@ -181,10 +181,12 @@
 
 .service-carousel {
   position: relative;
+  background: transparent;
 }
 
-.service-carousel-viewport {
-  overflow: hidden;
+.services .splide__track,
+.services .splide__list {
+  background: transparent;
 }
 
 .service-grid,
@@ -197,30 +199,26 @@
 
 .services .service-grid {
   display: flex;
-  will-change: transform;
-  transition: transform 420ms ease;
-}
-
-.services .service-grid.is-jumping {
-  transition: none;
+  gap: 0;
 }
 
 .service-card {
-  flex: 0 0 calc((100% - 2.9rem) / 3);
   min-height: 360px;
   padding: 2.2rem 1.45rem 1.35rem;
   background: rgba(255, 255, 255, 0.86);
   border: 1px solid var(--color-border);
-  box-shadow: var(--shadow-soft);
   text-align: center;
   transition: transform 220ms ease, box-shadow 220ms ease;
 }
 
-.service-card:hover,
 .product-card:hover,
 .article-card:hover {
   transform: translateY(-6px);
   box-shadow: 0 24px 60px rgba(29, 26, 23, 0.12);
+}
+
+.service-card:hover {
+  transform: translateY(-6px);
 }
 
 .card-icon {
@@ -255,7 +253,9 @@
   display: flex;
   justify-content: center;
   gap: 0.75rem;
+  padding: 0;
   margin-top: 1.55rem;
+  list-style: none;
 }
 
 .service-carousel-dot {
@@ -1065,10 +1065,6 @@ blockquote {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .service-card {
-    flex-basis: calc((100% - 1.45rem) / 2);
-  }
-
   .article-card {
     flex-basis: calc((100% - 1.45rem) / 2);
   }
@@ -1158,10 +1154,6 @@ blockquote {
 
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
-  }
-
-  .service-card {
-    flex-basis: 100%;
   }
 
   .article-card {

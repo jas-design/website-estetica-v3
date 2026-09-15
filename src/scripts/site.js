@@ -1,8 +1,11 @@
+import Splide from '@splidejs/splide';
+import '@splidejs/splide/css/core';
+
 const navToggle = document.querySelector('[data-nav-toggle]');
 const nav = document.querySelector('[data-nav]');
 const revealItems = document.querySelectorAll('[data-reveal]');
 const heroSlider = document.querySelector('[data-hero-slider]');
-const serviceCarousel = document.querySelector('[data-service-carousel]');
+const servicesSplide = document.querySelector('[data-services-splide]');
 const articleCarousel = document.querySelector('[data-article-carousel]');
 const testimonialCarousel = document.querySelector('[data-testimonial-carousel]');
 const featureCountdown = document.querySelector('[data-feature-countdown]');
@@ -203,108 +206,51 @@ function setupArticleCarousel() {
   startAutoplay();
 }
 
-function setupServiceCarousel() {
-  if (!serviceCarousel) return;
+function setupServicesSplide() {
+  if (!servicesSplide) return;
 
-  const track = serviceCarousel.querySelector('[data-service-track]');
-  const dots = [...serviceCarousel.querySelectorAll('[data-service-dot]')];
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  if (!track) return;
-
-  const originalCards = [...track.querySelectorAll('.service-card')];
-
-  if (originalCards.length < 2) return;
-
-  function cloneCard(card) {
-    const clone = card.cloneNode(true);
-
-    clone.removeAttribute('data-reveal');
-    clone.classList.add('is-visible');
-
-    return clone;
-  }
-
-  originalCards.forEach((card) => {
-    track.append(cloneCard(card));
+  const dots = [...servicesSplide.querySelectorAll('[data-services-dot]')];
+  const splide = new Splide(servicesSplide, {
+    type: 'loop',
+    perPage: 3,
+    perMove: 1,
+    focus: 0,
+    gap: '1.45rem',
+    arrows: false,
+    pagination: false,
+    autoplay: true,
+    interval: 4600,
+    pauseOnHover: true,
+    pauseOnFocus: true,
+    breakpoints: {
+      980: {
+        perPage: 2
+      },
+      768: {
+        perPage: 1
+      }
+    }
   });
-
-  [...originalCards].reverse().forEach((card) => {
-    track.prepend(cloneCard(card));
-  });
-
-  const originalCount = originalCards.length;
-  let activeIndex = originalCount;
-  let intervalId;
-
-  function getStepSize() {
-    const firstCard = track.querySelector('.service-card');
-    const secondCard = firstCard?.nextElementSibling;
-
-    if (!firstCard) return 0;
-    if (!secondCard) return firstCard.getBoundingClientRect().width;
-
-    return secondCard.getBoundingClientRect().left - firstCard.getBoundingClientRect().left;
-  }
 
   function updateDots() {
-    const normalizedIndex = ((activeIndex - originalCount) % originalCount + originalCount) % originalCount;
+    const activeIndex = ((splide.index % dots.length) + dots.length) % dots.length;
 
     dots.forEach((dot, dotIndex) => {
-      const isActive = dotIndex === normalizedIndex;
+      const isActive = dotIndex === activeIndex;
 
       dot.classList.toggle('is-active', isActive);
       dot.setAttribute('aria-pressed', String(isActive));
     });
   }
 
-  function moveTo(index, animate = true) {
-    activeIndex = index;
-    track.classList.toggle('is-jumping', !animate);
-    track.style.transform = `translateX(${-getStepSize() * activeIndex}px)`;
-    updateDots();
-  }
-
-  function normalizeLoop() {
-    if (activeIndex >= originalCount * 2) {
-      moveTo(originalCount, false);
-    }
-
-    if (activeIndex < originalCount) {
-      moveTo(originalCount * 2 - 1, false);
-    }
-  }
-
-  function stopAutoplay() {
-    if (intervalId) {
-      window.clearInterval(intervalId);
-      intervalId = undefined;
-    }
-  }
-
-  function startAutoplay() {
-    if (prefersReducedMotion || intervalId) return;
-
-    intervalId = window.setInterval(() => moveTo(activeIndex + 1), 4600);
-  }
-
   dots.forEach((dot, dotIndex) => {
     dot.addEventListener('click', () => {
-      stopAutoplay();
-      moveTo(originalCount + dotIndex);
+      splide.go(dotIndex);
     });
   });
 
-  track.addEventListener('transitionend', normalizeLoop);
-  window.addEventListener('resize', () => moveTo(activeIndex, false));
-
-  serviceCarousel.addEventListener('pointerenter', stopAutoplay);
-  serviceCarousel.addEventListener('pointerleave', startAutoplay);
-  serviceCarousel.addEventListener('focusin', stopAutoplay);
-  serviceCarousel.addEventListener('focusout', startAutoplay);
-
-  moveTo(activeIndex, false);
-  startAutoplay();
+  splide.on('mounted move moved', updateDots);
+  splide.mount();
 }
 
 function setupTestimonialCarousel() {
@@ -420,7 +366,7 @@ function setupFeatureCountdown() {
 setupMenu();
 setupRevealAnimation();
 setupHeroSlider();
-setupServiceCarousel();
+setupServicesSplide();
 setupArticleCarousel();
 setupTestimonialCarousel();
 setupFeatureCountdown();

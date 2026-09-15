@@ -155,11 +155,11 @@ const testimonials = [
     <section class="section services" id="servicos">
       <div class="container">
         <SectionHeading eyebrow="O que fazemos" title="Procedimentos em Destaque" text="Tratamentos faciais e corporais combinados conforme necessidade, histórico e objetivo de cada paciente." />
-        <div class="service-carousel" data-service-carousel>
-          <div class="service-carousel-viewport">
-            <div class="service-grid" data-service-track>
+        <div class="service-carousel splide" aria-label="Procedimentos em destaque" data-services-splide>
+          <div class="splide__track">
+            <div class="service-grid splide__list">
               {services.map((service) => (
-                <article class="service-card" data-reveal>
+                <article class="service-card splide__slide">
                   <span class="card-icon" aria-hidden="true">{service.icon}</span>
                   <h3>{service.title}</h3>
                   <p>{service.text}</p>
@@ -176,7 +176,7 @@ const testimonials = [
                 type="button"
                 aria-label={`Mostrar procedimento ${index + 1}`}
                 aria-pressed={index === 0 ? 'true' : 'false'}
-                data-service-dot
+                data-services-dot
               ></button>
             ))}
           </div>
