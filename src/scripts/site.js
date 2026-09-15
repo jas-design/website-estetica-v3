@@ -15,6 +15,7 @@ const servicesSplide = document.querySelector('[data-services-splide]');
 const articlesSplide = document.querySelector('[data-articles-splide]');
 const testimonialsSplide = document.querySelector('[data-testimonials-splide]');
 const featureCountdown = document.querySelector('[data-feature-countdown]');
+const enableAOS = false;
 
 function closeMenu() {
   navToggle?.setAttribute('aria-expanded', 'false');
@@ -35,6 +36,11 @@ function setupMenu() {
 }
 
 function setupAOS() {
+  if (!enableAOS) {
+    document.documentElement.classList.add('aos-disabled');
+    return;
+  }
+
   AOS.init({
     duration: 650,
     easing: 'ease-out-cubic',
