@@ -249,36 +249,36 @@ const testimonials = [
     </section>
 
     <!-- Section: Testimonial -->
-    <section class="section testimonial" data-testimonial-carousel>
+    <section class="section testimonial">
       <div class="container testimonial-inner" data-reveal>
         <p class="eyebrow">Depoimentos</p>
         <h2>O que elas dizem?</h2>
-        <div class="testimonial-viewport">
-          {testimonials.map(([quote, name, role], index) => (
-            <article
-              class:list={['testimonial-slide', { 'is-active': index === 0 }]}
-              data-testimonial-slide
-              hidden={index !== 0}
-            >
-              <div class="stars" aria-label="Avaliação demonstrativa de cinco estrelas">★★★★★</div>
-              <blockquote>“{quote}”</blockquote>
-              <p class="quote-author">
-                <strong>{name}</strong>
-                <span>{role}</span>
-              </p>
-            </article>
-          ))}
-        </div>
-        <div class="testimonial-dots" aria-label="Selecionar depoimento">
-          {testimonials.map((_, index) => (
-            <button
-              class:list={['testimonial-dot', { 'is-active': index === 0 }]}
-              type="button"
-              aria-label={`Mostrar depoimento ${index + 1}`}
-              aria-pressed={index === 0 ? 'true' : 'false'}
-              data-testimonial-dot
-            ></button>
-          ))}
+        <div class="testimonial-carousel splide" aria-label="Depoimentos de pacientes" data-testimonials-splide>
+          <div class="splide__track">
+            <div class="testimonial-viewport splide__list">
+              {testimonials.map(([quote, name, role]) => (
+                <article class="testimonial-slide splide__slide">
+                  <div class="stars" aria-label="Avaliação demonstrativa de cinco estrelas">★★★★★</div>
+                  <blockquote>“{quote}”</blockquote>
+                  <p class="quote-author">
+                    <strong>{name}</strong>
+                    <span>{role}</span>
+                  </p>
+                </article>
+              ))}
+            </div>
+          </div>
+          <div class="testimonial-dots" aria-label="Selecionar depoimento">
+            {testimonials.map((_, index) => (
+              <button
+                class:list={['testimonial-dot', { 'is-active': index === 0 }]}
+                type="button"
+                aria-label={`Mostrar depoimento ${index + 1}`}
+                aria-pressed={index === 0 ? 'true' : 'false'}
+                data-testimonial-dot
+              ></button>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -335,11 +335,11 @@ const testimonials = [
     <section class="section articles" id="blog">
       <div class="container">
         <SectionHeading eyebrow="Conteúdo para pacientes" title="Guias & Cuidados" />
-        <div class="article-carousel" data-article-carousel>
-          <div class="article-carousel-viewport">
-            <div class="article-grid" data-article-track>
+        <div class="article-carousel splide" aria-label="Artigos da clínica" data-articles-splide>
+          <div class="splide__track">
+            <div class="article-grid splide__list">
               {posts.map(([title, image]) => (
-                <article class="article-card" data-reveal>
+                <article class="article-card splide__slide">
                   <img src={image} alt="" loading="lazy" />
                   <div>
                     <p>Estética / Setembro, 2026</p>

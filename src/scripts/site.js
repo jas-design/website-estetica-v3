@@ -6,8 +6,8 @@ const nav = document.querySelector('[data-nav]');
 const revealItems = document.querySelectorAll('[data-reveal]');
 const heroSlider = document.querySelector('[data-hero-slider]');
 const servicesSplide = document.querySelector('[data-services-splide]');
-const articleCarousel = document.querySelector('[data-article-carousel]');
-const testimonialCarousel = document.querySelector('[data-testimonial-carousel]');
+const articlesSplide = document.querySelector('[data-articles-splide]');
+const testimonialsSplide = document.querySelector('[data-testimonials-splide]');
 const featureCountdown = document.querySelector('[data-feature-countdown]');
 
 function closeMenu() {
@@ -110,102 +110,6 @@ function setupHeroSlider() {
   startAutoplay();
 }
 
-function setupArticleCarousel() {
-  if (!articleCarousel) return;
-
-  const track = articleCarousel.querySelector('[data-article-track]');
-  const previousButton = articleCarousel.querySelector('[data-article-prev]');
-  const nextButton = articleCarousel.querySelector('[data-article-next]');
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  if (!track) return;
-
-  const originalCards = [...track.querySelectorAll('.article-card')];
-
-  if (originalCards.length < 2) return;
-
-  function cloneCard(card) {
-    const clone = card.cloneNode(true);
-
-    clone.removeAttribute('data-reveal');
-    clone.classList.add('is-visible');
-
-    return clone;
-  }
-
-  originalCards.forEach((card) => {
-    track.append(cloneCard(card));
-  });
-
-  [...originalCards].reverse().forEach((card) => {
-    track.prepend(cloneCard(card));
-  });
-
-  const originalCount = originalCards.length;
-  let activeIndex = originalCount;
-  let intervalId;
-
-  function getStepSize() {
-    const firstCard = track.querySelector('.article-card');
-    const secondCard = firstCard?.nextElementSibling;
-
-    if (!firstCard) return 0;
-    if (!secondCard) return firstCard.getBoundingClientRect().width;
-
-    return secondCard.getBoundingClientRect().left - firstCard.getBoundingClientRect().left;
-  }
-
-  function moveTo(index, animate = true) {
-    activeIndex = index;
-    track.classList.toggle('is-jumping', !animate);
-    track.style.transform = `translateX(${-getStepSize() * activeIndex}px)`;
-  }
-
-  function normalizeLoop() {
-    if (activeIndex >= originalCount * 2) {
-      moveTo(originalCount, false);
-    }
-
-    if (activeIndex < originalCount) {
-      moveTo(originalCount * 2 - 1, false);
-    }
-  }
-
-  function stopAutoplay() {
-    if (intervalId) {
-      window.clearInterval(intervalId);
-      intervalId = undefined;
-    }
-  }
-
-  function startAutoplay() {
-    if (prefersReducedMotion || intervalId) return;
-
-    intervalId = window.setInterval(() => moveTo(activeIndex + 1), 4500);
-  }
-
-  track.addEventListener('transitionend', normalizeLoop);
-  window.addEventListener('resize', () => moveTo(activeIndex, false));
-
-  previousButton?.addEventListener('click', () => {
-    stopAutoplay();
-    moveTo(activeIndex - 1);
-  });
-
-  nextButton?.addEventListener('click', () => {
-    stopAutoplay();
-    moveTo(activeIndex + 1);
-  });
-
-  articleCarousel.addEventListener('pointerenter', stopAutoplay);
-  articleCarousel.addEventListener('pointerleave', startAutoplay);
-  articleCarousel.addEventListener('focusin', stopAutoplay);
-  articleCarousel.addEventListener('focusout', startAutoplay);
-
-  moveTo(activeIndex, false);
-  startAutoplay();
-}
-
 function setupServicesSplide() {
   if (!servicesSplide) return;
 
@@ -253,26 +157,56 @@ function setupServicesSplide() {
   splide.mount();
 }
 
-function setupTestimonialCarousel() {
-  if (!testimonialCarousel) return;
+function setupArticlesSplide() {
+  if (!articlesSplide) return;
 
-  const slides = [...testimonialCarousel.querySelectorAll('[data-testimonial-slide]')];
-  const dots = [...testimonialCarousel.querySelectorAll('[data-testimonial-dot]')];
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let activeIndex = 0;
-  let intervalId;
+  const previousButton = articlesSplide.querySelector('[data-article-prev]');
+  const nextButton = articlesSplide.querySelector('[data-article-next]');
+  const splide = new Splide(articlesSplide, {
+    type: 'loop',
+    perPage: 3,
+    perMove: 1,
+    focus: 0,
+    gap: '1.45rem',
+    arrows: false,
+    pagination: false,
+    autoplay: true,
+    interval: 4500,
+    pauseOnHover: true,
+    pauseOnFocus: true,
+    breakpoints: {
+      980: {
+        perPage: 2
+      },
+      768: {
+        perPage: 1
+      }
+    }
+  });
 
-  if (slides.length < 2) return;
+  previousButton?.addEventListener('click', () => splide.go('<'));
+  nextButton?.addEventListener('click', () => splide.go('>'));
+  splide.mount();
+}
 
-  function showTestimonial(index) {
-    activeIndex = (index + slides.length) % slides.length;
+function setupTestimonialsSplide() {
+  if (!testimonialsSplide) return;
 
-    slides.forEach((slide, slideIndex) => {
-      const isActive = slideIndex === activeIndex;
+  const dots = [...testimonialsSplide.querySelectorAll('[data-testimonial-dot]')];
+  const splide = new Splide(testimonialsSplide, {
+    type: 'loop',
+    perPage: 1,
+    perMove: 1,
+    arrows: false,
+    pagination: false,
+    autoplay: true,
+    interval: 5600,
+    pauseOnHover: true,
+    pauseOnFocus: true
+  });
 
-      slide.hidden = !isActive;
-      slide.classList.toggle('is-active', isActive);
-    });
+  function updateDots() {
+    const activeIndex = ((splide.index % dots.length) + dots.length) % dots.length;
 
     dots.forEach((dot, dotIndex) => {
       const isActive = dotIndex === activeIndex;
@@ -282,33 +216,14 @@ function setupTestimonialCarousel() {
     });
   }
 
-  function stopAutoplay() {
-    if (intervalId) {
-      window.clearInterval(intervalId);
-      intervalId = undefined;
-    }
-  }
-
-  function startAutoplay() {
-    if (prefersReducedMotion || intervalId) return;
-
-    intervalId = window.setInterval(() => showTestimonial(activeIndex + 1), 5600);
-  }
-
   dots.forEach((dot, dotIndex) => {
     dot.addEventListener('click', () => {
-      stopAutoplay();
-      showTestimonial(dotIndex);
+      splide.go(dotIndex);
     });
   });
 
-  testimonialCarousel.addEventListener('pointerenter', stopAutoplay);
-  testimonialCarousel.addEventListener('pointerleave', startAutoplay);
-  testimonialCarousel.addEventListener('focusin', stopAutoplay);
-  testimonialCarousel.addEventListener('focusout', startAutoplay);
-
-  showTestimonial(0);
-  startAutoplay();
+  splide.on('mounted move moved', updateDots);
+  splide.mount();
 }
 
 function setupFeatureCountdown() {
@@ -367,6 +282,6 @@ setupMenu();
 setupRevealAnimation();
 setupHeroSlider();
 setupServicesSplide();
-setupArticleCarousel();
-setupTestimonialCarousel();
+setupArticlesSplide();
+setupTestimonialsSplide();
 setupFeatureCountdown();

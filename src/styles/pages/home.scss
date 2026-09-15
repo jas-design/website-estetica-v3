@@ -528,25 +528,11 @@
 }
 
 .testimonial-viewport {
-  display: grid;
   min-height: 250px;
-  align-items: start;
 }
 
 .testimonial-slide {
-  grid-area: 1 / 1;
-  opacity: 0;
-  transform: translateY(12px);
-  transition: opacity 420ms ease, transform 420ms ease;
-}
-
-.testimonial-slide.is-active {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.testimonial-slide[hidden] {
-  display: none;
+  text-align: center;
 }
 
 .stars {
@@ -727,23 +713,12 @@ blockquote {
   position: relative;
 }
 
-.article-carousel-viewport {
-  overflow: hidden;
-}
-
 .articles .article-grid {
   display: flex;
-  gap: 1.45rem;
-  will-change: transform;
-  transition: transform 420ms ease;
-}
-
-.articles .article-grid.is-jumping {
-  transition: none;
+  gap: 0;
 }
 
 .article-card {
-  flex: 0 0 calc((100% - 2.9rem) / 3);
   background: #fff;
   border: 1px solid var(--color-border);
   transition: transform 220ms ease, box-shadow 220ms ease;
@@ -1065,10 +1040,6 @@ blockquote {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .article-card {
-    flex-basis: calc((100% - 1.45rem) / 2);
-  }
-
   .treatment-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -1154,10 +1125,6 @@ blockquote {
 
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
-  }
-
-  .article-card {
-    flex-basis: 100%;
   }
 
   .feature-band {
