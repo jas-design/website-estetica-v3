@@ -59,7 +59,7 @@
   border-radius: 50%;
   font-size: 0;
   line-height: 0;
-  transition: color 180ms ease, background 180ms ease, border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+  transition: color 180ms ease, background 180ms ease, border-color 180ms ease, transform 180ms ease;
 }
 
 .social-icon {
@@ -86,29 +86,31 @@
   mask-image: url('/svgs/instagram.svg');
 }
 
-.social-link--facebook {
-  color: #1877f2;
+.footer .social-link--facebook {
+  color: #fff;
+  background: #1877f2;
+  border-color: #1877f2;
 }
 
-.social-link--instagram {
-  color: #e4405f;
+.footer .social-link--instagram {
+  color: #fff;
+  background: linear-gradient(135deg, #f58529, #dd2a7b 48%, #8134af);
+  border-color: #dd2a7b;
 }
 
-.social-link:hover {
+.footer .social-link:hover {
   color: #fff;
   transform: translateY(-3px);
 }
 
-.social-link--facebook:hover {
-  background: #1877f2;
-  border-color: #1877f2;
-  box-shadow: 0 12px 28px rgba(24, 119, 242, 0.35);
+.footer .social-link--facebook:hover {
+  background: #0f63d6;
+  border-color: #0f63d6;
 }
 
-.social-link--instagram:hover {
-  background: linear-gradient(135deg, #f58529, #dd2a7b 48%, #8134af);
+.footer .social-link--instagram:hover {
+  background: linear-gradient(135deg, #f77737, #c91f68 48%, #6c2799);
   border-color: #dd2a7b;
-  box-shadow: 0 12px 28px rgba(221, 42, 123, 0.35);
 }
 
 .footer-bottom {
