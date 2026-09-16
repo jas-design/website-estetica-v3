@@ -16,7 +16,8 @@ const heroSlides = [
     text: 'Combinamos análise facial, equipamentos modernos e indicação responsável para criar um plano coerente com a sua rotina.',
     button: 'Conhecer protocolos',
     note: 'Tecnologia a favor da naturalidade',
-    image: '/images/clinic-hero-light-2.webp'
+    image: '/images/clinic-hero-light-2.webp',
+    mobileImage: '/images/clinic-hero-light-2-mobile.webp'
   },
   {
     eyebrow: 'Estética avançada com avaliação individual',
@@ -24,7 +25,8 @@ const heroSlides = [
     text: 'Protocolos faciais e corporais planejados para valorizar seus traços, cuidar da pele e acompanhar seus objetivos com responsabilidade.',
     button: 'Agendar avaliação',
     note: 'Resultados começam por uma boa avaliação',
-    image: '/images/clinic-hero-light-1.webp'
+    image: '/images/clinic-hero-light-1.webp',
+    mobileImage: '/images/clinic-hero-light-1-mobile.webp'
   },  
   {
     eyebrow: 'Protocolos faciais e corporais',
@@ -32,7 +34,8 @@ const heroSlides = [
     text: 'Da limpeza de pele aos bioestimuladores, cada etapa é definida a partir da sua avaliação, histórico e objetivo estético.',
     button: 'Falar com a clínica',
     note: 'Cada pele pede uma estratégia',
-    image: '/images/clinic-hero-light-3.webp'
+    image: '/images/clinic-hero-light-3.webp',
+    mobileImage: '/images/clinic-hero-light-3-mobile.webp'
   }
 ];
 
@@ -118,13 +121,16 @@ const testimonials = [
         <div class="swiper-wrapper">
         {heroSlides.map((slide, index) => (
           <div class="hero-bg-slide swiper-slide">
-            <img
-              class="hero-slide-image"
-              src={slide.image}
-              alt=""
-              loading={index === 0 ? 'eager' : 'lazy'}
-              decoding="async"
-            />
+            <picture class="hero-slide-picture">
+              <source srcset={slide.mobileImage} media="(max-width: 768px)" />
+              <img
+                class="hero-slide-image"
+                src={slide.image}
+                alt=""
+                loading={index === 0 ? 'eager' : 'lazy'}
+                decoding="async"
+              />
+            </picture>
             <div class="container hero-inner">
               <div class="hero-copy">
                 <p class="eyebrow">{slide.eyebrow}</p>

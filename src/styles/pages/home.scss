@@ -24,9 +24,14 @@
   height: 100%;
 }
 
-.hero-slide-image {
+.hero-slide-picture {
   position: absolute;
   inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-slide-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -1095,6 +1100,21 @@ blockquote {
   .hero {
     height: 620px;
     min-height: 620px;
+  }
+
+  .hero-bg-slide::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(
+      90deg,
+      rgba(251, 250, 247, 0.94) 0%,
+      rgba(251, 250, 247, 0.78) 44%,
+      rgba(251, 250, 247, 0.24) 76%,
+      rgba(251, 250, 247, 0) 100%
+    );
   }
 
   .hero-inner {
